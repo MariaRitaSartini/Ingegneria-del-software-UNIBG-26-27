@@ -1,0 +1,23 @@
+
+import org.jooq.codegen.GenerationTool;
+import org.jooq.impl.QOM.CreateDatabase;
+import org.jooq.meta.jaxb.Configuration;
+import org.jooq.meta.jaxb.Database;
+import org.jooq.meta.jaxb.Generator;
+import org.jooq.meta.jaxb.Jdbc;
+import org.jooq.meta.jaxb.Target;
+
+public class GeneratoreClassi{
+		
+	public static void main(String[] args) throws Exception {
+		Configuration configuration = new Configuration()
+				.withJdbc(new Jdbc().withDriver("org.sqlite.JDBC")
+				.withUrl("jdbc:sqlite:database.db3"))
+				.withGenerator(new Generator()
+				.withDatabase(new Database().withName("org.jooq.meta.sqlite.SQLiteDatabase").withIncludes(".*")
+				.withExcludes(""))
+				.withTarget(new Target().withPackageName("contatti.jooq.generated")
+				.withDirectory("src-generated/")));
+		GenerationTool.generate(configuration);
+	}
+}
